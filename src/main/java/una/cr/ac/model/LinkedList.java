@@ -75,11 +75,16 @@ public class LinkedList {
         switch (level) {
             case 1:
                 levelData = new String[]{
-                    "#####",
-                    "# @ #",
-                    "# $ #",
-                    "# . #",
-                    "#####"
+                    "################",
+                    "#@",
+                    "#",
+                    "#",
+                    "#", 
+                    "#",
+                    "#",
+                    "#",
+                    "#",
+                    "#",
                 };
                 break;
             case 2:
@@ -113,13 +118,13 @@ public class LinkedList {
                 break;
             case 5:
                 levelData = new String[]{
-                    "######",
+                    "####################",
                     "#    #",
                     "#@$$.#",
                     "#  # #",
                     "#  .  #",
                     "######",
-                    "#", 
+                    "#",
                     "#",
                     "#",};
                 break;
@@ -148,6 +153,5 @@ public class LinkedList {
         }
         return sb.toString();
     }
-
 
 }
