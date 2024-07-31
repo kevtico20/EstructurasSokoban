@@ -1,0 +1,50 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 31 jul 2024, 11:01:55
+    Author     : Kevin
+*/
+
+
+@font-face {
+    font-family: 'Minecraft';
+    src: url('../resources/fonts/Minecraft.ttf');
+}
+
+*{
+    -fx-font-family: Minecraft;
+    -fx-base-color-focus:#09b6bc;
+    -fx-base-color-unfocus:#4d4d4d;
+    -fx-base-color-etiquetas:#4d4d4d/*#bcbcbc*/;
+    -fx-base-color-titulos:#51b6cd;
+    -fx-base-color-error:#D34336;
+    -fx-base-color-id:#00C853;
+
+}
+
+
+.btnButton {
+    -fx-background-color: rgba(255, 165, 0, 0.7);
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-text-fill: white;
+    -fx-font-size: 30px;
+}
+
+.btnButton:hover{
+    -fx-background-color: rgba(255, 165, 0,1);
+}
+
+.btnCargar{
+    -fx-background-color: rgba(113, 84, 187, 0.5);
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-text-fill: white;
+    -fx-font-size: 30px;
+}
+
+.btnCargar:hover{
+    -fx-background-color: rgba(113, 84, 187, 1);
+}
