@@ -8,6 +8,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -36,6 +39,14 @@ public class BoardViewController extends Controller implements Initializable {
 
     private LinkedList board;
     private Player player;
+    @FXML
+    private Label lbnivel;
+    @FXML
+    private Button btnGuardar;
+    @FXML
+    private Button btnReiniciar;
+    @FXML
+    private Button btnsalir;
 
     /**
      * Initializes the controller class.
@@ -45,42 +56,79 @@ public class BoardViewController extends Controller implements Initializable {
         // TODO
     }
 
-    @FXML
-    private void moveUp(ActionEvent event) {
-        player.movePlayer(player.getX(), player.getY() - 1);
-        drawBoard();
-        System.out.println(board); // Imprime el tablero después de mover
-    }
-
-    @FXML
-    private void moveDown(ActionEvent event) {
-        player.movePlayer(player.getX(), player.getY() + 1);
-        drawBoard();
-        System.out.println(board); // Imprime el tablero después de mover
-    }
-
-    @FXML
-    private void moveLeft(ActionEvent event) {
-        player.movePlayer(player.getX() - 1, player.getY());
-        drawBoard();
-        System.out.println(board); // Imprime el tablero después de mover
-    }
-
-    @FXML
-    private void moveRight(ActionEvent event) {
-        player.movePlayer(player.getX() + 1, player.getY());
-        drawBoard();
-        System.out.println(board); // Imprime el tablero después de mover
-    }
-
     @Override
     public void initialize() {
         System.out.println("Inicializando el controlador...");
         board = new LinkedList(20, 10);
-        board.initializeLevel(1); // Inicializa el primer nivel
+        board.initializeLevel(1); 
         player = new Player(board);
         drawBoard();
         System.out.println(board);
+
+       
+        btnUp.setOnAction(this::moveUp);
+        btnDown.setOnAction(this::moveDown);
+        btnLeft.setOnAction(this::moveLeft);
+        btnRight.setOnAction(this::moveRight);
+
+      
+        gridPane.setFocusTraversable(true);
+        gridPane.setOnKeyPressed(this::handleKeyPress);
+        gridPane.requestFocus(); 
+    }
+
+      @FXML
+    private void moveUp(ActionEvent event) {
+        movePlayer(player.getX(), player.getY() - 1);
+    }
+
+    @FXML
+    private void moveDown(ActionEvent event) {
+        movePlayer(player.getX(), player.getY() + 1);
+    }
+
+    @FXML
+    private void moveLeft(ActionEvent event) {
+        movePlayer(player.getX() - 1, player.getY());
+    }
+
+    @FXML
+    private void moveRight(ActionEvent event) {
+        movePlayer(player.getX() + 1, player.getY());
+    }
+
+    private void handleKeyPress(KeyEvent event) {
+        switch (event.getCode()) {
+            case W:
+                movePlayer(player.getX(), player.getY() - 1);
+                break;
+            case S:
+                movePlayer(player.getX(), player.getY() + 1);
+                break;
+            case A:
+                movePlayer(player.getX() - 1, player.getY());
+                System.out.println("Solo llego una vez");
+                break;
+            case D:
+                movePlayer(player.getX() + 1, player.getY());
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void movePlayer(int newX, int newY) {
+        if (isValidMove(newX, newY)) {
+            player.movePlayer(newX, newY);
+            drawBoard();
+            System.out.println(board);
+        } else {
+            System.out.println("Movimiento no válido: (" + newX + ", " + newY + ")");
+        }
+    }
+
+    private boolean isValidMove(int x, int y) {
+        return x >= 0 && x < board.getWidth() && y >= 0 && y < board.getHeight();
     }
 
     private void drawBoard() {
@@ -90,13 +138,13 @@ public class BoardViewController extends Controller implements Initializable {
 
         for (int i = 0; i < board.getWidth(); i++) {
             ColumnConstraints colConstraints = new ColumnConstraints();
-            colConstraints.setMinWidth(30); // Ajustar el tamaño de la columna
+            colConstraints.setMinWidth(30);
             gridPane.getColumnConstraints().add(colConstraints);
         }
 
         for (int i = 0; i < board.getHeight(); i++) {
             RowConstraints rowConstraints = new RowConstraints();
-            rowConstraints.setMinHeight(30); // Ajustar el tamaño de la fila
+            rowConstraints.setMinHeight(30);
             gridPane.getRowConstraints().add(rowConstraints);
         }
 
@@ -105,8 +153,8 @@ public class BoardViewController extends Controller implements Initializable {
                 char cell = board.getCell(j, i);
                 Text text = new Text(String.valueOf(cell));
                 text.setFont(Font.font(20));
-                GridPane.setHalignment(text, HPos.CENTER); // Centrar el texto horizontalmente
-                GridPane.setValignment(text, VPos.CENTER); // Centrar el texto verticalmente
+                GridPane.setHalignment(text, HPos.CENTER);
+                GridPane.setValignment(text, VPos.CENTER);
                 gridPane.add(text, j, i);
             }
         }

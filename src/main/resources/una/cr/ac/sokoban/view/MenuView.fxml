@@ -33,7 +33,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </JFXButton>
-                  <JFXButton fx:id="btnSalir" alignment="CENTER" contentDisplay="CENTER" onAction="#onActionJugar" prefHeight="59.0" prefWidth="289.0" styleClass="btnButton" stylesheets="@Style.css" text="Salir" VBox.vgrow="ALWAYS">
+                  <JFXButton fx:id="btnSalir" alignment="CENTER" contentDisplay="CENTER" onAction="#onActionSalir" prefHeight="59.0" prefWidth="289.0" styleClass="btnButton" stylesheets="@Style.css" text="Salir" VBox.vgrow="ALWAYS">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>

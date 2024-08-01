@@ -7,6 +7,7 @@ package una.cr.ac.controller;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -24,6 +25,8 @@ public class MenuViewController extends Controller implements Initializable {
     private JFXButton btnJugar;
     @FXML
     private JFXButton btnCargarPartida;
+    @FXML
+    private JFXButton btnSalir;
 
     /**
      * Initializes the controller class.
@@ -41,6 +44,11 @@ public class MenuViewController extends Controller implements Initializable {
     private void onActionJugar(ActionEvent event) {
         FlowController.getInstance().goViewInWindow("BoardView");
         ((Stage) btnJugar.getScene().getWindow()).close();
+    }
+
+    @FXML
+    private void onActionSalir(ActionEvent event) {
+         Platform.exit();
     }
 
 }
