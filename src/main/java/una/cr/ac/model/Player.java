@@ -73,40 +73,44 @@ public class Player {
                     y = newY;
                     board.setCell(x, y, '@'); // Mover al jugador a la nueva posición
                     System.out.println("Movimiento exitoso");
-                } else if (currentCell == '$') {
+                    printBoard(); // Mostrar el tablero después de mover el jugador
+                } else if (currentCell == '$'  || currentCell == '!') {
                     // Movimiento de caja
                     int nextX = newX + (newX - x);
                     int nextY = newY + (newY - y);
 
+                    System.out.println("Intentando mover la caja a: (" + nextX + ", " + nextY + ")");
+
                     if (nextX >= 0 && nextX < board.getWidth() && nextY >= 0 && nextY < board.getHeight()) {
                         char nextCell = board.getCell(nextX, nextY);
+                        System.out.println("Celda de destino para la caja: " + nextCell);
 
                         if (nextCell == ' ' || nextCell == '.') {
-                            // Verificar que la caja no se empuje contra una pared
-                            if (board.getCell(nextX, nextY) == ' ' || board.getCell(nextX, nextY) == '.') {
-                                // Limpiar la posición anterior del jugador
-                                if (board.getCell(x, y) == '@' || board.getCell(x, y) == '!') {
-                                    board.setCell(x, y, points.contains(new Point(x, y)) ? '.' : ' '); // Restaurar el punto si estaba ocupado por el jugador
-                                }
-
-                                // Mover la caja
-                                if (nextCell == '.') {
-                                    board.setCell(nextX, nextY, '!'); // Caja ubicada correctamente
-                                } else {
-                                    board.setCell(nextX, nextY, '$'); // Mover la caja
-                                }
-
-                                // Mover al jugador
-                                board.setCell(newX, newY, '@'); // Mover el jugador
-                                x = newX;
-                                y = newY;
-                                System.out.println("Movimiento con caja exitoso");
+                            // Restaurar el estado de la celda original de la caja
+                            if (points.contains(new Point(x, y))) {
+                                board.setCell(x, y, '.'); // Restaurar el punto si era un destino
                             } else {
-                                System.out.println("Movimiento con caja fallido: la celda de destino está ocupada");
+                                board.setCell(x, y, ' '); // Limpiar la posición anterior
                             }
+
+                            // Mover la caja
+                            if (nextCell == '.') {
+                                board.setCell(nextX, nextY, '!'); // Caja en el punto de destino
+                            } else {
+                                board.setCell(nextX, nextY, '$'); // Mover la caja a una celda vacía
+                            }
+
+                            // Mover al jugador
+                            board.setCell(newX, newY, '@'); // Mover el jugador
+                            x = newX;
+                            y = newY;
+                            System.out.println("Movimiento con caja exitoso");
+                            printBoard(); // Mostrar el tablero después de mover la caja
                         } else {
-                            System.out.println("Movimiento con caja fallido: la celda de destino está bloqueada por una pared");
+                            System.out.println("Movimiento con caja fallido: la celda de destino está ocupada por " + nextCell);
                         }
+                    } else {
+                        System.out.println("Movimiento con caja fallido: fuera de límites");
                     }
                 }
             } else {
@@ -117,9 +121,18 @@ public class Player {
         }
     }
 
+    private void printBoard() {
+        System.out.println("Tablero actual:");
+        for (int i = 0; i < board.getHeight(); i++) {
+            for (int j = 0; j < board.getWidth(); j++) {
+                System.out.print(board.getCell(j, i) + " ");
+            }
+            System.out.println();
+        }
+    }
+
     // Clase para manejar las posiciones de los puntos
     private static class Point {
-
         int x, y;
 
         Point(int x, int y) {
@@ -129,12 +142,8 @@ public class Player {
 
         @Override
         public boolean equals(Object obj) {
-            if (this == obj) {
-                return true;
-            }
-            if (obj == null || getClass() != obj.getClass()) {
-                return false;
-            }
+            if (this == obj) return true;
+            if (obj == null || getClass() != obj.getClass()) return false;
             Point point = (Point) obj;
             return x == point.x && y == point.y;
         }
