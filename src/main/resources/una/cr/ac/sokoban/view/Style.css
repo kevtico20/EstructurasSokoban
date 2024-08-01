@@ -48,3 +48,58 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 .btnCargar:hover{
     -fx-background-color: rgba(113, 84, 187, 1);
 }
+
+
+.btnButtonBoard {
+    -fx-background-color: rgba(255, 165, 0, 0.7);
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-text-fill: white;
+    -fx-font-size: 22px;
+}
+
+.btnButtonBoard:hover{
+    -fx-background-color: rgba(255, 165, 0,1);
+}
+
+.backgroundBoardMenu{
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #41b910  , #2e8b57);
+    -fx-border-radius: 15;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 10, 0.25, 0, 4);
+}
+
+
+.backsideLabel{
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 10, 0.25, 0, 4);
+    -fx-text-fill: white;
+}
+
+.btnArrowUp{
+    -fx-background-image: url('../resources/flechasArriba.png');
+    -fx-background-size: 50px 50px; 
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat; 
+}
+
+.btnArrowDown{
+    -fx-background-image: url('../resources/flechasAbajo.png');
+    -fx-background-size: 50px 50px; 
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat; 
+}
+
+
+.btnArrowLeft{
+    -fx-background-image: url('../resources/flechasIzquierda.png');
+    -fx-background-size: 50px 50px; 
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat; 
+}
+
+.btnArrowRight{
+    -fx-background-image: url('../resources/flechasDerecha.png');
+    -fx-background-size: 50px 50px; 
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat; 
+}

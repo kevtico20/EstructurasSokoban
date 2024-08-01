@@ -75,7 +75,7 @@ public class LinkedList {
         switch (level) {
             case 1:
                 levelData = new String[]{
-                    "################",
+                    "####################",
                     "#@",
                     "#",
                     "#",

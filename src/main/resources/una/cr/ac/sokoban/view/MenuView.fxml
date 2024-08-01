@@ -23,12 +23,17 @@
          <center>
             <VBox alignment="CENTER" prefHeight="517.0" prefWidth="893.0" spacing="30.0" BorderPane.alignment="CENTER">
                <children>
-                  <JFXButton fx:id="btnJugar" alignment="CENTER" contentDisplay="CENTER" onAction="#onActionJugar" prefHeight="59.0" prefWidth="289.0" styleClass="btnButton" stylesheets="@Style.css" text="Jugar">
+                  <JFXButton fx:id="btnJugar" alignment="CENTER" contentDisplay="CENTER" onAction="#onActionJugar" prefHeight="59.0" prefWidth="289.0" styleClass="btnButton" stylesheets="@Style.css" text="Jugar" VBox.vgrow="ALWAYS">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </JFXButton>
-                  <JFXButton fx:id="btnCargarPartida" contentDisplay="CENTER" prefHeight="59.0" prefWidth="289.0" styleClass="btnCargar" stylesheets="@Style.css" text="Cargar Partida">
+                  <JFXButton fx:id="btnCargarPartida" contentDisplay="CENTER" prefHeight="59.0" prefWidth="289.0" styleClass="btnCargar" stylesheets="@Style.css" text="Cargar Partida" VBox.vgrow="ALWAYS">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+                  <JFXButton fx:id="btnSalir" alignment="CENTER" contentDisplay="CENTER" onAction="#onActionJugar" prefHeight="59.0" prefWidth="289.0" styleClass="btnButton" stylesheets="@Style.css" text="Salir" VBox.vgrow="ALWAYS">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
