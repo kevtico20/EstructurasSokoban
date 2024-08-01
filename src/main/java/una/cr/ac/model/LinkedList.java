@@ -10,13 +10,6 @@ public class LinkedList {
     private final int height;
     private final Node head;
 
-    /**
-     * Constructor que inicializa la lista enlazada bidimensional con un tamaño
-     * específico.
-     *
-     * @param width Ancho del tablero.
-     * @param height Altura del tablero.
-     */
     public LinkedList(int width, int height) {
         this.width = width;
         this.height = height;
