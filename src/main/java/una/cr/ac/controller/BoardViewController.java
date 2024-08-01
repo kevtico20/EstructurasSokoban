@@ -60,7 +60,7 @@ public class BoardViewController extends Controller implements Initializable {
     public void initialize() {
         System.out.println("Inicializando el controlador...");
         board = new LinkedList(20, 10);
-        board.initializeLevel(1); 
+        board.initializeLevel(4); 
         player = new Player(board);
         drawBoard();
         System.out.println(board);
