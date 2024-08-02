@@ -14,3 +14,4 @@ una\cr\ac\model\Player.class
 una\cr\ac\controller\BoardViewController.class
 una\cr\ac\sokoban\App.class
 una\cr\ac\model\Node.class
+una\cr\ac\controller\FinalViewController.class
