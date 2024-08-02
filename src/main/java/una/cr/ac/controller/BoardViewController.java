@@ -19,6 +19,7 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import una.cr.ac.model.Img;
+import una.cr.ac.model.LevelManager;
 import una.cr.ac.model.LinkedList;
 import una.cr.ac.model.Player;
 
@@ -51,6 +52,10 @@ public class BoardViewController extends Controller implements Initializable {
     @FXML
     private Button btnsalir;
 
+    private int currentLevel;
+
+    private LevelManager levelManager;
+
     /**
      * Initializes the controller class.
      */
@@ -62,12 +67,10 @@ public class BoardViewController extends Controller implements Initializable {
     @Override
     public void initialize() {
         System.out.println("Inicializando el controlador...");
-        board = new LinkedList(20, 10);
-        board.initializeLevel(4);
-
-        player = new Player(board);
+        levelManager = new LevelManager();
         drawBoard();
-        System.out.println(board);
+        updateLevelLabel();
+        System.out.println(levelManager.getBoard());
 
         btnUp.setOnAction(this::moveUp);
         btnDown.setOnAction(this::moveDown);
@@ -81,38 +84,37 @@ public class BoardViewController extends Controller implements Initializable {
 
     @FXML
     private void moveUp(ActionEvent event) {
-        movePlayer(player.getX(), player.getY() - 1);
+        movePlayer(levelManager.getPlayer().getX(), levelManager.getPlayer().getY() - 1);
     }
 
     @FXML
     private void moveDown(ActionEvent event) {
-        movePlayer(player.getX(), player.getY() + 1);
+        movePlayer(levelManager.getPlayer().getX(), levelManager.getPlayer().getY() + 1);
     }
 
     @FXML
     private void moveLeft(ActionEvent event) {
-        movePlayer(player.getX() - 1, player.getY());
+        movePlayer(levelManager.getPlayer().getX() - 1, levelManager.getPlayer().getY());
     }
 
     @FXML
     private void moveRight(ActionEvent event) {
-        movePlayer(player.getX() + 1, player.getY());
+        movePlayer(levelManager.getPlayer().getX() + 1, levelManager.getPlayer().getY());
     }
 
     private void handleKeyPress(KeyEvent event) {
         switch (event.getCode()) {
             case W:
-                movePlayer(player.getX(), player.getY() - 1);
+                movePlayer(levelManager.getPlayer().getX(), levelManager.getPlayer().getY() - 1);
                 break;
             case S:
-                movePlayer(player.getX(), player.getY() + 1);
+                movePlayer(levelManager.getPlayer().getX(), levelManager.getPlayer().getY() + 1);
                 break;
             case A:
-                movePlayer(player.getX() - 1, player.getY());
-                System.out.println("Solo llego una vez");
+                movePlayer(levelManager.getPlayer().getX() - 1, levelManager.getPlayer().getY());
                 break;
             case D:
-                movePlayer(player.getX() + 1, player.getY());
+                movePlayer(levelManager.getPlayer().getX() + 1, levelManager.getPlayer().getY());
                 break;
             default:
                 break;
@@ -121,16 +123,16 @@ public class BoardViewController extends Controller implements Initializable {
 
     private void movePlayer(int newX, int newY) {
         if (isValidMove(newX, newY)) {
-            player.movePlayer(newX, newY);
+            levelManager.movePlayer(newX, newY);
             drawBoard();
-            System.out.println(board);
+            System.out.println(levelManager.getBoard());
         } else {
             System.out.println("Movimiento no válido: (" + newX + ", " + newY + ")");
         }
     }
 
     private boolean isValidMove(int x, int y) {
-        return x >= 0 && x < board.getWidth() && y >= 0 && y < board.getHeight();
+        return x >= 0 && x < levelManager.getBoard().getWidth() && y >= 0 && y < levelManager.getBoard().getHeight();
     }
 
     private void drawBoard() {
@@ -139,22 +141,22 @@ public class BoardViewController extends Controller implements Initializable {
         gridPane.getRowConstraints().clear();
 
         // Configurar las columnas y filas
-        for (int i = 0; i < board.getWidth(); i++) {
+        for (int i = 0; i < levelManager.getBoard().getWidth(); i++) {
             ColumnConstraints colConstraints = new ColumnConstraints();
             colConstraints.setMinWidth(40); // Tamaño de la imagen
             gridPane.getColumnConstraints().add(colConstraints);
         }
 
-        for (int i = 0; i < board.getHeight(); i++) {
+        for (int i = 0; i < levelManager.getBoard().getHeight(); i++) {
             RowConstraints rowConstraints = new RowConstraints();
             rowConstraints.setMinHeight(40); // Tamaño de la imagen
             gridPane.getRowConstraints().add(rowConstraints);
         }
 
         // Dibujar el tablero usando imágenes
-        for (int i = 0; i < board.getHeight(); i++) {
-            for (int j = 0; j < board.getWidth(); j++) {
-                char cell = board.getCell(j, i);
+        for (int i = 0; i < levelManager.getBoard().getHeight(); i++) {
+            for (int j = 0; j < levelManager.getBoard().getWidth(); j++) {
+                char cell = levelManager.getBoard().getCell(j, i);
                 String imagePath = "";
 
                 switch (cell) {
@@ -193,6 +195,21 @@ public class BoardViewController extends Controller implements Initializable {
                 }
             }
         }
+
+        updateLevelLabel();
+    }
+
+    @FXML
+    private void onActionReset(ActionEvent event) {
+        gridPane.setFocusTraversable(true);
+        gridPane.setOnKeyPressed(this::handleKeyPress);
+        gridPane.requestFocus();
+        levelManager.loadLevel(levelManager.getCurrentLevel());
+        drawBoard();
+    }
+
+    private void updateLevelLabel() {
+        lbnivel.setText("Nivel: " + levelManager.getCurrentLevel());
     }
 
 }

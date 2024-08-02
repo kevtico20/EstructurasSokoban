@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 C:\Users\Extreme PC\Documents\PROGRA 4\EstructurasSokoban\src\main\java\una\cr\ac\controller\FinalViewController.java
 C:\Users\Extreme PC\Documents\PROGRA 4\EstructurasSokoban\src\main\java\una\cr\ac\model\Img.java
 C:\Users\Extreme PC\Documents\PROGRA 4\EstructurasSokoban\src\main\java\una\cr\ac\model\Node.java
@@ -14,3 +15,22 @@ C:\Users\Extreme PC\Documents\PROGRA 4\EstructurasSokoban\src\main\java\una\cr\a
 C:\Users\Extreme PC\Documents\PROGRA 4\EstructurasSokoban\src\main\java\una\cr\ac\sokoban\App.java
 C:\Users\Extreme PC\Documents\PROGRA 4\EstructurasSokoban\src\main\java\una\cr\ac\controller\Controller.java
 C:\Users\Extreme PC\Documents\PROGRA 4\EstructurasSokoban\src\main\java\una\cr\ac\model\Player.java
+=======
+D:\sokoban\src\main\java\una\cr\ac\util\Mensaje.java
+D:\sokoban\src\main\java\una\cr\ac\util\BindingUtils.java
+D:\sokoban\src\main\java\una\cr\ac\model\Node.java
+D:\sokoban\src\main\java\una\cr\ac\controller\BoardViewController.java
+D:\sokoban\src\main\java\una\cr\ac\util\Request.java
+D:\sokoban\src\main\java\una\cr\ac\model\LinkedList.java
+D:\sokoban\src\main\java\una\cr\ac\util\FlowController.java
+D:\sokoban\src\main\java\una\cr\ac\controller\Controller.java
+D:\sokoban\src\main\java\una\cr\ac\sokoban\App.java
+D:\sokoban\src\main\java\una\cr\ac\controller\MenuViewController.java
+D:\sokoban\src\main\java\una\cr\ac\util\Respuesta.java
+D:\sokoban\src\main\java\una\cr\ac\model\LevelManager.java
+D:\sokoban\src\main\java\una\cr\ac\util\AppContext.java
+D:\sokoban\src\main\java\una\cr\ac\model\Player.java
+D:\sokoban\src\main\java\una\cr\ac\util\Formato.java
+D:\sokoban\src\main\java\una\cr\ac\model\Img.java
+D:\sokoban\src\main\java\una\cr\ac\controller\FinalViewController.java
+>>>>>>> Stashed changes
