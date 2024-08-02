@@ -74,23 +74,10 @@ public class LinkedList {
                 levelData = readLevel("src/main/java/una/cr/ac/levels/Level1.txt");
                 break;
             case 2:
-                levelData = new String[]{
-                    "#####",
-                    "#   #",
-                    "# @ #",
-                    "#$ .#",
-                    "#####"
-                };
+                levelData = readLevel("src/main/java/una/cr/ac/levels/Level2.txt");
                 break;
             case 3:
-                levelData = new String[]{
-                    "######",
-                    "#        #",
-                    "# ## #",
-                    "#@ $.#",
-                    "# .  #",
-                    "######"
-                };
+                levelData = readLevel("src/main/java/una/cr/ac/levels/Level3.txt");
                 break;
             case 4:
                 levelData = readLevel("src/main/java/una/cr/ac/levels/Level4.txt");;
@@ -124,7 +111,7 @@ public class LinkedList {
         return sb.toString();
     }
     
-     public static String[] readLevel(String file) {
+     public String[] readLevel(String file) {
         String[] lineList = new String[10];
 
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
