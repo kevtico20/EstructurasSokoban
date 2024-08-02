@@ -12,9 +12,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="725.0" prefWidth="1539.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="una.cr.ac.controller.BoardViewController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0" prefWidth="1179.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="una.cr.ac.controller.BoardViewController">
    <center>
-      <GridPane fx:id="gridPane" alignment="CENTER" gridLinesVisible="true" hgap="40.0" prefHeight="725.0" prefWidth="1566.0" vgap="40.0" BorderPane.alignment="CENTER">
+      <GridPane fx:id="gridPane" alignment="CENTER" gridLinesVisible="true" BorderPane.alignment="CENTER">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
