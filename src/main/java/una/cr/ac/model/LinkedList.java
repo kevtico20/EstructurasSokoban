@@ -1,5 +1,9 @@
 package una.cr.ac.model;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 /**
  * Clase que representa una lista enlazada bidimensional para un tablero de
  * juego.
@@ -67,17 +71,7 @@ public class LinkedList {
 
         switch (level) {
             case 1:
-                levelData = new String[]{
-                    "####################",
-                    "#@",
-                    "#",
-                    "#",
-                    "#",
-                    "#",
-                    "#",
-                    "#",
-                    "#",
-                    "#",};
+                levelData = readLevel("src/main/java/una/cr/ac/levels/Level1.txt");
                 break;
             case 2:
                 levelData = new String[]{
@@ -99,30 +93,10 @@ public class LinkedList {
                 };
                 break;
             case 4:
-                levelData = new String[]{
-                    "#####      #########",
-                    "############       #",
-                    "#    $  ...     #  #",
-                    "#    ########## ####",
-                    "#### ########## #   ",
-                    "#### ########## ####",
-                    "#@ $          $    #",
-                    "##     ######## ## #",
-                    "#      #      #    #",
-                    "########      ######",};
+                levelData = readLevel("src/main/java/una/cr/ac/levels/Level4.txt");;
                 break;
             case 5:
-                levelData = new String[]{
-                    "##### ##############",
-                    "#.. # #    #      .#",
-                    "#   # #$      $@####",
-                    "## ####   ### # #   ",
-                    " # $ #    #.# # #   ",
-                    "## # #    # #.# ####",
-                    "#      # ## # # $  #",
-                    "## #$       # # ## #",
-                    "#     #####   #    #",
-                    "####################",};
+                levelData = readLevel("src/main/java/una/cr/ac/levels/Level5.txt");;
                 break;
             default:
                 throw new IllegalArgumentException("Nivel no válido: " + level);
@@ -149,5 +123,25 @@ public class LinkedList {
         }
         return sb.toString();
     }
+    
+     public static String[] readLevel(String file) {
+        String[] lineList = new String[10];
+
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line;
+            int i=0;
+            while ((line = br.readLine()) != null && i<10) {
+                
+                lineList[i]=line;
+                i++;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return lineList;
+    }
+
+
 
 }
