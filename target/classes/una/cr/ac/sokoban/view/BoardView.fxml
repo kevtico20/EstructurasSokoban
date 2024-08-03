@@ -68,7 +68,7 @@
                   </Label>
                </children>
             </VBox>
-            <Button fx:id="btnGuardar" mnemonicParsing="false" prefHeight="43.0" prefWidth="143.0" styleClass="btnButtonBoard" stylesheets="@Style.css" text="Guardar" VBox.vgrow="ALWAYS" />
+            <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#onActionBtnGuardar" prefHeight="43.0" prefWidth="143.0" styleClass="btnButtonBoard" stylesheets="@Style.css" text="Guardar" VBox.vgrow="ALWAYS" />
             <Button fx:id="btnReiniciar" mnemonicParsing="false" onAction="#onActionReset" prefHeight="43.0" prefWidth="143.0" styleClass="btnButtonBoard" stylesheets="@Style.css" text="Reiniciar" VBox.vgrow="ALWAYS">
                <font>
                   <Font size="20.0" />

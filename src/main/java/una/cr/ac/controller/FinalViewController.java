@@ -4,12 +4,14 @@
  */
 package una.cr.ac.controller;
 
+import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -17,7 +19,9 @@ import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
+import una.cr.ac.util.FlowController;
 
 /**
  * FXML Controller class
@@ -34,6 +38,8 @@ public class FinalViewController extends Controller implements Initializable {
     private Label labelWin;
     @FXML
     private ImageView imgTrofeo;
+    @FXML
+    private JFXButton btnMenu;
 
     /**
      * Initializes the controller class.
@@ -107,5 +113,11 @@ public class FinalViewController extends Controller implements Initializable {
         rgbTimeline.play();
 
         glow.setInput(colorAdjust);
+    }
+
+    @FXML
+    private void onActionBtnMenu(ActionEvent event) {
+        FlowController.getInstance().goViewInWindow("MenuView");
+       ((Stage) btnMenu.getScene().getWindow()).close();
     }
 }

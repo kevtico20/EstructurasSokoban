@@ -8,6 +8,8 @@ una\cr\ac\controller\SpriteAnimation.class
 una\cr\ac\controller\Controller.class
 una\cr\ac\model\Img.class
 una\cr\ac\util\Mensaje.class
+una\cr\ac\model\GuardarPartida.class
+una\cr\ac\util\ManejoDatos.class
 una\cr\ac\util\Formato.class
 una\cr\ac\util\Respuesta.class
 una\cr\ac\controller\MenuViewController.class

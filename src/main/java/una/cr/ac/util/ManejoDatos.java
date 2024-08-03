@@ -19,10 +19,10 @@ import una.cr.ac.model.LinkedList;
  */
 public class ManejoDatos {
 
-    private static final String TXT_PATH = "src/main/java/una/cr/ac/sokoban/model/record.txt";
+    private static final String TXT_PATH = "src/main/java/una/cr/ac/model/datos.txt";
 
     public static void guardarPartida(GuardarPartida partida) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(TXT_PATH, true))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(TXT_PATH, false))) {
             // Guardar LinkedList
             LinkedList board = partida.getBoard();
             for (int i = 0; i < board.getHeight(); i++) {

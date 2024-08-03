@@ -15,6 +15,17 @@ public class GuardarPartida {
     LinkedList board;
     Stack<String> pila;
 
+    public GuardarPartida(LinkedList board, Stack<String> pila) {
+        this.board = board;
+        this.pila = pila;
+    }
+
+    public GuardarPartida() {
+    }
+
+
+    
+
     public LinkedList getBoard() {
         return board;
     }

@@ -3,6 +3,7 @@ package una.cr.ac.controller;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Stack;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -21,11 +22,15 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Duration;
+import una.cr.ac.model.GuardarPartida;
 import una.cr.ac.model.Img;
 import una.cr.ac.model.LevelManager;
 import una.cr.ac.model.LinkedList;
 import una.cr.ac.model.Player;
+import una.cr.ac.util.FlowController;
+import una.cr.ac.util.ManejoDatos;
 
 /**
  * FXML Controller class
@@ -62,6 +67,7 @@ public class BoardViewController extends Controller implements Initializable {
 
     int direction = 0;
     int count = 0;
+    Stack<String> pila = new Stack<>();
 
     /**
      * Initializes the controller class.
@@ -259,6 +265,16 @@ public class BoardViewController extends Controller implements Initializable {
 
     private void updateLevelLabel() {
         lbnivel.setText("Nivel: " + levelManager.getCurrentLevel());
+    }
+
+    @FXML
+    private void onActionBtnGuardar(ActionEvent event) {
+        GuardarPartida guardarPartida= new GuardarPartida();
+        guardarPartida.setBoard(levelManager.getBoard());
+        guardarPartida.setPila(pila);
+        ManejoDatos.guardarPartida(guardarPartida);
+        FlowController.getInstance().goViewInWindow("MenuView");
+       ((Stage) btnGuardar.getScene().getWindow()).close();
     }
 
 }
