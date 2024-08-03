@@ -4,6 +4,7 @@ una\cr\ac\util\BindingUtils.class
 una\cr\ac\controller\BoardViewController$1.class
 una\cr\ac\util\FlowController.class
 una\cr\ac\model\LevelManager.class
+una\cr\ac\controller\SpriteAnimation.class
 una\cr\ac\controller\Controller.class
 una\cr\ac\model\Img.class
 una\cr\ac\util\Mensaje.class
