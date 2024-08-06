@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Stack;
+import java.util.Vector;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -67,7 +68,8 @@ public class BoardViewController extends Controller implements Initializable {
 
     int direction = 0;
     int count = 0;
-    Stack<String> pila = new Stack<>();
+    
+    private Vector<String> movimientos = new Vector<>();
 
     /**
      * Initializes the controller class.
@@ -98,6 +100,7 @@ public class BoardViewController extends Controller implements Initializable {
     @FXML
     private void moveUp(ActionEvent event) {
         direction = 1;
+        movimientos.add("up");
         movePlayer(levelManager.getPlayer().getX(), levelManager.getPlayer().getY() - 1);
         
 
@@ -106,6 +109,7 @@ public class BoardViewController extends Controller implements Initializable {
     @FXML
     private void moveDown(ActionEvent event) {
         direction= 0;
+        movimientos.add("down");
         movePlayer(levelManager.getPlayer().getX(), levelManager.getPlayer().getY() + 1);
         
 
@@ -114,6 +118,7 @@ public class BoardViewController extends Controller implements Initializable {
     @FXML
     private void moveLeft(ActionEvent event) {
         direction=2;
+        movimientos.add("left");
         movePlayer(levelManager.getPlayer().getX() - 1, levelManager.getPlayer().getY());
         
 
@@ -122,6 +127,7 @@ public class BoardViewController extends Controller implements Initializable {
     @FXML
     private void moveRight(ActionEvent event) {
         direction=3;
+        movimientos.add("right");
         movePlayer(levelManager.getPlayer().getX() + 1, levelManager.getPlayer().getY());
 
     }
@@ -130,18 +136,22 @@ public class BoardViewController extends Controller implements Initializable {
         switch (event.getCode()) {
             case W:
                 direction=1;
+                movimientos.add("up");
                 movePlayer(levelManager.getPlayer().getX(), levelManager.getPlayer().getY() - 1);
                 break;
             case S:
                 direction=0;
+                movimientos.add("down");
                 movePlayer(levelManager.getPlayer().getX(), levelManager.getPlayer().getY() + 1);
                 break;
             case A:
                 direction=2;
+                movimientos.add("left");
                 movePlayer(levelManager.getPlayer().getX() - 1, levelManager.getPlayer().getY());
                 break;
             case D:
                 direction=3;
+                movimientos.add("right");
                 movePlayer(levelManager.getPlayer().getX() + 1, levelManager.getPlayer().getY());
                 break;
             default:
@@ -271,7 +281,7 @@ public class BoardViewController extends Controller implements Initializable {
     private void onActionBtnGuardar(ActionEvent event) {
         GuardarPartida guardarPartida= new GuardarPartida();
         guardarPartida.setBoard(levelManager.getBoard());
-        guardarPartida.setPila(pila);
+        guardarPartida.setVector(movimientos);
         ManejoDatos.guardarPartida(guardarPartida);
         FlowController.getInstance().goViewInWindow("MenuView");
        ((Stage) btnGuardar.getScene().getWindow()).close();

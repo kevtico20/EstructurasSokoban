@@ -9,7 +9,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Stack;
+import java.util.Vector;
 import una.cr.ac.model.GuardarPartida;
 import una.cr.ac.model.LinkedList;
 
@@ -34,9 +34,9 @@ public class ManejoDatos {
             bw.write("---");
             bw.newLine();
 
-            // Guardar Stack
-            Stack<String> pila = partida.getPila();
-            for (String move : pila) {
+            // Guardar Vector
+            Vector<String> vector = partida.getVector();
+            for (String move : vector) {
                 bw.write(move);
                 bw.newLine();
             }
@@ -50,7 +50,7 @@ public class ManejoDatos {
     public static GuardarPartida leePartida() {
         GuardarPartida partida = new GuardarPartida();
         LinkedList board = null;
-        Stack<String> pila = new Stack<>();
+        Vector<String> vector = new Vector<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(TXT_PATH))) {
             String line;
@@ -63,7 +63,7 @@ public class ManejoDatos {
                     board = new LinkedList(width, height);
                     br.mark(1000); // Marcar posición actual
                 } else if (line.equals("===")) {
-                    // Fin de la pila
+                    // Fin del vector
                     break;
                 } else if (board == null) {
                     // Leer dimensiones del tablero
@@ -80,11 +80,11 @@ public class ManejoDatos {
 
             br.reset(); // Volver a la posición marcada
             while ((line = br.readLine()) != null && !line.equals("===")) {
-                pila.push(line);
+                vector.add(line);
             }
 
             partida.setBoard(board);
-            partida.setPila(pila);
+            partida.setVector(vector);
 
         } catch (IOException e) {
             e.printStackTrace();

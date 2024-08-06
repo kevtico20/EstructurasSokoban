@@ -9,4 +9,23 @@
 #         #        #
 ####################
 ---
+right
+right
+up
+right
+up
+left
+left
+left
+left
+left
+left
+left
+left
+left
+left
+left
+left
+left
+left
 ===

@@ -4,7 +4,7 @@
  */
 package una.cr.ac.model;
 
-import java.util.Stack;
+import java.util.Vector;
 
 /**
  *
@@ -13,18 +13,15 @@ import java.util.Stack;
 public class GuardarPartida {
 
     LinkedList board;
-    Stack<String> pila;
+    Vector<String> vector;
 
-    public GuardarPartida(LinkedList board, Stack<String> pila) {
+    public GuardarPartida(LinkedList board, Vector<String> vector) {
         this.board = board;
-        this.pila = pila;
+        this.vector = vector;
     }
 
     public GuardarPartida() {
     }
-
-
-    
 
     public LinkedList getBoard() {
         return board;
@@ -34,12 +31,12 @@ public class GuardarPartida {
         this.board = board;
     }
 
-    public Stack<String> getPila() {
-        return pila;
+    public Vector<String> getVector() {
+        return vector;
     }
 
-    public void setPila(Stack<String> pila) {
-        this.pila = pila;
+    public void setVector(Vector<String> vector) {
+        this.vector = vector;
     }
     
 }
