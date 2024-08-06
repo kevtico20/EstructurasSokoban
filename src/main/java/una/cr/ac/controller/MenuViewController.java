@@ -12,7 +12,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.stage.Stage;
+import una.cr.ac.model.GuardarPartida;
 import una.cr.ac.util.FlowController;
+import una.cr.ac.util.ManejoDatos;
 
 /**
  * FXML Controller class
@@ -49,6 +51,13 @@ public class MenuViewController extends Controller implements Initializable {
     @FXML
     private void onActionSalir(ActionEvent event) {
          Platform.exit();
+    }
+
+    @FXML
+    private void onActionBtnCargarPartida(ActionEvent event) {
+        GuardarPartida partida = ManejoDatos.leePartida();
+        FlowController.getInstance().goViewInWindow("BoardView", partida);
+        ((Stage) btnCargarPartida.getScene().getWindow()).close();
     }
 
 }

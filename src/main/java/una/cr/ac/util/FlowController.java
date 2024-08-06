@@ -20,7 +20,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import una.cr.ac.controller.BoardViewController;
 import una.cr.ac.controller.Controller;
+import una.cr.ac.model.GuardarPartida;
 
 public class FlowController {
 
@@ -138,6 +140,27 @@ public class FlowController {
     public void goViewInWindow(String viewName) {
         FXMLLoader loader = getLoader(viewName);
         Controller controller = loader.getController();
+        controller.initialize();
+        Stage stage = new Stage();
+//        stage.getIcons().add(new Image(App.class.getResourceAsStream("/cr/ac/una/unaplanilla/resources/Usuario-48.png")));
+        stage.setTitle("Sokoban");
+        stage.setOnHidden((WindowEvent event) -> {
+            controller.getStage().getScene().setRoot(new Pane());
+            controller.setStage(null);
+        });
+        controller.setStage(stage);
+        Parent root = loader.getRoot();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.show();
+    }
+    public void goViewInWindow(String viewName, GuardarPartida partida) {
+        FXMLLoader loader = getLoader(viewName);
+        Controller controller = loader.getController();
+        if (controller instanceof BoardViewController) {
+            ((BoardViewController) controller).cargarPartida(partida);
+        }
         controller.initialize();
         Stage stage = new Stage();
 //        stage.getIcons().add(new Image(App.class.getResourceAsStream("/cr/ac/una/unaplanilla/resources/Usuario-48.png")));
