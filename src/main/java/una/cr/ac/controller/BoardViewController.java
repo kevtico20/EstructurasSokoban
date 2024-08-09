@@ -68,7 +68,7 @@ public class BoardViewController extends Controller implements Initializable {
 
     int direction = 0;
     int count = 0;
-    
+
     private Vector<String> movimientos = new Vector<>();
 
     /**
@@ -102,31 +102,28 @@ public class BoardViewController extends Controller implements Initializable {
         direction = 1;
         movimientos.add("up");
         movePlayer(levelManager.getPlayer().getX(), levelManager.getPlayer().getY() - 1);
-        
 
     }
 
     @FXML
     private void moveDown(ActionEvent event) {
-        direction= 0;
+        direction = 0;
         movimientos.add("down");
         movePlayer(levelManager.getPlayer().getX(), levelManager.getPlayer().getY() + 1);
-        
 
     }
 
     @FXML
     private void moveLeft(ActionEvent event) {
-        direction=2;
+        direction = 2;
         movimientos.add("left");
         movePlayer(levelManager.getPlayer().getX() - 1, levelManager.getPlayer().getY());
-        
 
     }
 
     @FXML
     private void moveRight(ActionEvent event) {
-        direction=3;
+        direction = 3;
         movimientos.add("right");
         movePlayer(levelManager.getPlayer().getX() + 1, levelManager.getPlayer().getY());
 
@@ -135,22 +132,22 @@ public class BoardViewController extends Controller implements Initializable {
     private void handleKeyPress(KeyEvent event) {
         switch (event.getCode()) {
             case W:
-                direction=1;
+                direction = 1;
                 movimientos.add("up");
                 movePlayer(levelManager.getPlayer().getX(), levelManager.getPlayer().getY() - 1);
                 break;
             case S:
-                direction=0;
+                direction = 0;
                 movimientos.add("down");
                 movePlayer(levelManager.getPlayer().getX(), levelManager.getPlayer().getY() + 1);
                 break;
             case A:
-                direction=2;
+                direction = 2;
                 movimientos.add("left");
                 movePlayer(levelManager.getPlayer().getX() - 1, levelManager.getPlayer().getY());
                 break;
             case D:
-                direction=3;
+                direction = 3;
                 movimientos.add("right");
                 movePlayer(levelManager.getPlayer().getX() + 1, levelManager.getPlayer().getY());
                 break;
@@ -164,11 +161,11 @@ public class BoardViewController extends Controller implements Initializable {
             levelManager.movePlayer(newX, newY);
             drawBoard();
             System.out.println(levelManager.getBoard());
-             if(count==3){
-                    count=0;
-                } else{
+            if (count == 3) {
+                count = 0;
+            } else {
                 count++;
-              }
+            }
         } else {
             System.out.println("Movimiento no válido: (" + newX + ", " + newY + ")");
         }
@@ -253,7 +250,6 @@ public class BoardViewController extends Controller implements Initializable {
         final int row = direction;
         final int WIDTH = 160;
         final int HEIGHT = 160;
-        
 
         // Crear la animación
         currentFrame[0] = (currentFrame[0] + count) % 4;
@@ -279,12 +275,18 @@ public class BoardViewController extends Controller implements Initializable {
 
     @FXML
     private void onActionBtnGuardar(ActionEvent event) {
-        GuardarPartida guardarPartida= new GuardarPartida();
+        GuardarPartida guardarPartida = new GuardarPartida();
         guardarPartida.setBoard(levelManager.getBoard());
         guardarPartida.setVector(movimientos);
         ManejoDatos.guardarPartida(guardarPartida);
         FlowController.getInstance().goViewInWindow("MenuView");
-       ((Stage) btnGuardar.getScene().getWindow()).close();
+        ((Stage) btnGuardar.getScene().getWindow()).close();
     }
 
+    public void cargarPartida(GuardarPartida partida) {
+        this.movimientos = partida.getVector();
+        levelManager.setBoard(partida.getBoard());
+        drawBoard();
+        updateLevelLabel();
+    }
 }

@@ -51,34 +51,34 @@ public class ManejoDatos {
         GuardarPartida partida = new GuardarPartida();
         LinkedList board = null;
         Vector<String> vector = new Vector<>();
+        int width = 0;
+        int height = 0;
+        String line;
 
         try (BufferedReader br = new BufferedReader(new FileReader(TXT_PATH))) {
-            String line;
-            int width = 0;
-            int height = 0;
-
-            while ((line = br.readLine()) != null) {
-                if (line.equals("---")) {
-                    // Fin del tablero, inicializar la LinkedList
-                    board = new LinkedList(width, height);
-                    br.mark(1000); // Marcar posición actual
-                } else if (line.equals("===")) {
-                    // Fin del vector
-                    break;
-                } else if (board == null) {
-                    // Leer dimensiones del tablero
+            // Leer el tablero y determinar dimensiones
+            while ((line = br.readLine()) != null && !line.equals("---")) {
+                if (width == 0) {
                     width = line.length();
-                    height++;
-                } else {
-                    // Leer contenido del tablero
-                    for (int x = 0; x < line.length(); x++) {
-                        board.setCell(x, height - 1, line.charAt(x));
-                    }
-                    br.mark(1000); // Marcar posición actual
                 }
+                height++;
             }
 
-            br.reset(); // Volver a la posición marcada
+            // Inicializar la LinkedList con las dimensiones obtenidas
+            board = new LinkedList(width, height);
+
+            // Leer el tablero nuevamente
+            int currentRow = 0;
+            br.mark(10000); // Marcar posición para regresar después de la sección del tablero
+            while ((line = br.readLine()) != null && !line.equals("---")) {
+                for (int x = 0; x < line.length(); x++) {
+                    board.setCell(x, currentRow, line.charAt(x));
+                }
+                currentRow++;
+            }
+
+            // Leer el vector de movimientos
+            br.reset(); // Regresar a la posición marcada
             while ((line = br.readLine()) != null && !line.equals("===")) {
                 vector.add(line);
             }

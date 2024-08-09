@@ -96,4 +96,9 @@ public class LevelManager {
             return 31 * x + y;
         }
     }
+
+    public void setBoard(LinkedList board) {
+        this.board = board;
+    }
+    
 }
