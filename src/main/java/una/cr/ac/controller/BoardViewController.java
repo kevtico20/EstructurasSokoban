@@ -49,7 +49,7 @@ public class BoardViewController extends Controller implements Initializable {
     @FXML
     private JFXButton btnRight;
     @FXML
-    private GridPane gridPane;
+    public GridPane gridPane;
 
     private LinkedList board;
     private Player player;
@@ -85,7 +85,7 @@ public class BoardViewController extends Controller implements Initializable {
         levelManager = new LevelManager();
         drawBoard();
         updateLevelLabel();
-        System.out.println(levelManager.getBoard());
+//        System.out.println(levelManager.getBoard());
 
         btnUp.setOnAction(this::moveUp);
         btnDown.setOnAction(this::moveDown);
@@ -156,25 +156,35 @@ public class BoardViewController extends Controller implements Initializable {
         }
     }
 
-    private void movePlayer(int newX, int newY) {
-        if (isValidMove(newX, newY)) {
-            levelManager.movePlayer(newX, newY);
-            drawBoard();
-            System.out.println(levelManager.getBoard());
-            if (count == 3) {
-                count = 0;
-            } else {
-                count++;
+   private void movePlayer(int newX, int newY) {
+    if (isValidMove(newX, newY)) {
+        levelManager.movePlayer(newX, newY);
+        drawBoard();
+
+        // Verifica si todas las cajas están en sus posiciones finales después del movimiento
+        if (levelManager.isLevelComplete()) {
+                if (levelManager.getCurrentLevel() < levelManager.getTOTAL_LEVELS()) {
+                    levelManager.advanceLevel();  // Avanza al siguiente nivel si no es el último
+                    drawBoard();  // Redibuja el tablero para el nuevo nivel
+                } else {
+                    onGameCompleted();  // Llama al método para completar el juego si es el último nivel
+                }
             }
-        } else {
-            System.out.println("Movimiento no válido: (" + newX + ", " + newY + ")");
-        }
-    }
 
-    private boolean isValidMove(int x, int y) {
-        return x >= 0 && x < levelManager.getBoard().getWidth() && y >= 0 && y < levelManager.getBoard().getHeight();
+        System.out.println(levelManager.getBoard());
+    } else {
+        System.out.println("Movimiento no válido: (" + newX + ", " + newY + ")");
     }
+}
 
+ private boolean isValidMove(int x, int y) {
+    // Verifica si el movimiento está dentro de los límites y no es una pared
+    return x >= 0 && x < levelManager.getBoard().getWidth() && y >= 0 && y < levelManager.getBoard().getHeight()
+            && levelManager.getBoard().getCell(x, y) != '#';
+}
+
+ 
+ 
     private void drawBoard() {
         gridPane.getChildren().clear();
         gridPane.getColumnConstraints().clear();
@@ -288,5 +298,17 @@ public class BoardViewController extends Controller implements Initializable {
         levelManager.setBoard(partida.getBoard());
         drawBoard();
         updateLevelLabel();
+    }
+    
+    
+      private void onGameCompleted() {
+        System.out.println("¡Felicidades! Has completado todos los niveles.");
+        
+        // Redirigir a la vista de ganadores
+        FlowController.getInstance().goViewInWindow("FinalView");
+
+        // Cerrar la ventana actual
+        Stage currentStage = (Stage) gridPane.getScene().getWindow();
+        currentStage.close();
     }
 }

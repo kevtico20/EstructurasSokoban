@@ -73,7 +73,7 @@ public class Player {
                     y = newY;
                     board.setCell(x, y, '@'); // Mover al jugador a la nueva posición
                     System.out.println("Movimiento exitoso");
-                    printBoard(); // Mostrar el tablero después de mover el jugador
+//                    printBoard(); // Mostrar el tablero después de mover el jugador
                 } else if (currentCell == '$'  || currentCell == '!') {
                     // Movimiento de caja
                     int nextX = newX + (newX - x);
@@ -105,7 +105,7 @@ public class Player {
                             x = newX;
                             y = newY;
                             System.out.println("Movimiento con caja exitoso");
-                            printBoard(); // Mostrar el tablero después de mover la caja
+//                            printBoard(); // Mostrar el tablero después de mover la caja
                         } else {
                             System.out.println("Movimiento con caja fallido: la celda de destino está ocupada por " + nextCell);
                         }
