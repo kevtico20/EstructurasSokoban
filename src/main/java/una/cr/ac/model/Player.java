@@ -16,8 +16,6 @@ public class Player {
     private final LinkedList board;
     private int x;
     private int y;
-
-    // Guardar posiciones de los puntos en un conjunto
     private final Set<Point> points = new HashSet<>();
 
     public Player(LinkedList board) {
@@ -47,6 +45,25 @@ public class Player {
         return y;
     }
 
+    // Nuevo método para establecer la posición del jugador
+    public void setPosition(int newX, int newY) {
+        // Limpiar la posición anterior del jugador
+        if (board.getCell(x, y) == '@' || board.getCell(x, y) == '!') {
+            if (points.contains(new Point(x, y))) {
+                board.setCell(x, y, '.'); // Restaurar el punto si estaba en la posición original
+            } else {
+                board.setCell(x, y, ' '); // Limpiar la posición anterior
+            }
+        }
+
+        // Actualizar las coordenadas del jugador
+        this.x = newX;
+        this.y = newY;
+
+        // Colocar al jugador en la nueva posición en el tablero
+        board.setCell(newX, newY, '@');
+    }
+
     public void movePlayer(int newX, int newY) {
         // Verificar que las nuevas coordenadas están dentro del rango del tablero
         if (newX >= 0 && newX < board.getWidth() && newY >= 0 && newY < board.getHeight()) {
@@ -59,7 +76,6 @@ public class Player {
                 if (currentCell == ' ' || currentCell == '.') {
                     // Limpiar la posición anterior del jugador
                     if (board.getCell(x, y) == '@' || board.getCell(x, y) == '!') {
-                        // Restaurar el punto original si el jugador estaba en un punto
                         if (points.contains(new Point(x, y))) {
                             board.setCell(x, y, '.'); // Restaurar el punto si estaba en la posición original
                         } else {
@@ -73,8 +89,7 @@ public class Player {
                     y = newY;
                     board.setCell(x, y, '@'); // Mover al jugador a la nueva posición
                     System.out.println("Movimiento exitoso");
-//                    printBoard(); // Mostrar el tablero después de mover el jugador
-                } else if (currentCell == '$'  || currentCell == '!') {
+                } else if (currentCell == '$' || currentCell == '!') {
                     // Movimiento de caja
                     int nextX = newX + (newX - x);
                     int nextY = newY + (newY - y);
@@ -86,26 +101,22 @@ public class Player {
                         System.out.println("Celda de destino para la caja: " + nextCell);
 
                         if (nextCell == ' ' || nextCell == '.') {
-                            // Restaurar el estado de la celda original de la caja
                             if (points.contains(new Point(x, y))) {
                                 board.setCell(x, y, '.'); // Restaurar el punto si era un destino
                             } else {
                                 board.setCell(x, y, ' '); // Limpiar la posición anterior
                             }
 
-                            // Mover la caja
                             if (nextCell == '.') {
                                 board.setCell(nextX, nextY, '!'); // Caja en el punto de destino
                             } else {
                                 board.setCell(nextX, nextY, '$'); // Mover la caja a una celda vacía
                             }
 
-                            // Mover al jugador
                             board.setCell(newX, newY, '@'); // Mover el jugador
                             x = newX;
                             y = newY;
                             System.out.println("Movimiento con caja exitoso");
-//                            printBoard(); // Mostrar el tablero después de mover la caja
                         } else {
                             System.out.println("Movimiento con caja fallido: la celda de destino está ocupada por " + nextCell);
                         }
@@ -131,7 +142,6 @@ public class Player {
         }
     }
 
-    // Clase para manejar las posiciones de los puntos
     private static class Point {
         int x, y;
 

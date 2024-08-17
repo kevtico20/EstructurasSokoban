@@ -155,15 +155,18 @@ public class FlowController {
         stage.centerOnScreen();
         stage.show();
     }
+
     public void goViewInWindow(String viewName, GuardarPartida partida) {
         FXMLLoader loader = getLoader(viewName);
         Controller controller = loader.getController();
+
+        // Verificar si el controlador es de tipo BoardViewController y cargar la partida
         if (controller instanceof BoardViewController) {
             ((BoardViewController) controller).cargarPartida(partida);
         }
+
         controller.initialize();
         Stage stage = new Stage();
-//        stage.getIcons().add(new Image(App.class.getResourceAsStream("/cr/ac/una/unaplanilla/resources/Usuario-48.png")));
         stage.setTitle("Sokoban");
         stage.setOnHidden((WindowEvent event) -> {
             controller.getStage().getScene().setRoot(new Pane());
@@ -176,7 +179,7 @@ public class FlowController {
         stage.centerOnScreen();
         stage.show();
     }
-    
+
     public void goLogInWindowModal(Boolean resizable) {
         goViewInWindowModal("RegisterInView", this.controller.getStage(), resizable);
     }
@@ -211,7 +214,7 @@ public class FlowController {
     public static void setIdioma(ResourceBundle idioma) {
         FlowController.idioma = idioma;
     }
-    
+
     public void initialize() {
         this.loaders.clear();
     }

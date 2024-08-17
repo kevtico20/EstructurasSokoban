@@ -1,6 +1,9 @@
 package una.cr.ac.controller;
 
 import com.jfoenix.controls.JFXButton;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Stack;
@@ -31,7 +34,7 @@ import una.cr.ac.model.LevelManager;
 import una.cr.ac.model.LinkedList;
 import una.cr.ac.model.Player;
 import una.cr.ac.util.FlowController;
-import una.cr.ac.util.ManejoDatos;
+//import una.cr.ac.util.ManejoDatos;
 
 /**
  * FXML Controller class
@@ -82,7 +85,9 @@ public class BoardViewController extends Controller implements Initializable {
     @Override
     public void initialize() {
         System.out.println("Inicializando el controlador...");
-        levelManager = new LevelManager();
+        if (levelManager == null) {
+            levelManager = new LevelManager();
+        }
         drawBoard();
         updateLevelLabel();
 //        System.out.println(levelManager.getBoard());
@@ -129,6 +134,39 @@ public class BoardViewController extends Controller implements Initializable {
 
     }
 
+    public void cargarPartida(GuardarPartida partida) {
+        if (partida == null) {
+            throw new IllegalArgumentException("La partida guardada es nula.");
+        }
+
+        // Inicializar el LevelManager
+        levelManager = new LevelManager(partida.getNivel(), true);
+
+        // Crear y configurar el tablero basado en los datos guardados
+        LinkedList board = new LinkedList(partida.getLevelData()[0].length(), partida.getLevelData().length);
+
+        for (int i = 0; i < partida.getLevelData().length; i++) {
+            String row = partida.getLevelData()[i];
+            for (int j = 0; j < row.length(); j++) {
+                board.setCell(j, i, row.charAt(j));
+            }
+        }
+
+        // Verificación: Mostrar el estado del tablero después de configurarlo
+        System.out.println("Tablero después de configurar desde la partida guardada:");
+        for (int y = 0; y < board.getHeight(); y++) {
+            for (int x = 0; x < board.getWidth(); x++) {
+                System.out.print(board.getCell(x, y));
+            }
+            System.out.println();
+        }
+
+        // Asignar el tablero al LevelManager
+        levelManager.setBoard(board);
+        // Redibujar el tablero en la interfaz gráfica
+        drawBoard();
+    }
+
     private void handleKeyPress(KeyEvent event) {
         switch (event.getCode()) {
             case W:
@@ -156,13 +194,13 @@ public class BoardViewController extends Controller implements Initializable {
         }
     }
 
-   private void movePlayer(int newX, int newY) {
-    if (isValidMove(newX, newY)) {
-        levelManager.movePlayer(newX, newY);
-        drawBoard();
+    private void movePlayer(int newX, int newY) {
+        if (isValidMove(newX, newY)) {
+            levelManager.movePlayer(newX, newY);
+            drawBoard();
 
-        // Verifica si todas las cajas están en sus posiciones finales después del movimiento
-        if (levelManager.isLevelComplete()) {
+            // Verifica si todas las cajas están en sus posiciones finales después del movimiento
+            if (levelManager.isLevelComplete()) {
                 if (levelManager.getCurrentLevel() < levelManager.getTOTAL_LEVELS()) {
                     levelManager.advanceLevel();  // Avanza al siguiente nivel si no es el último
                     drawBoard();  // Redibuja el tablero para el nuevo nivel
@@ -171,20 +209,18 @@ public class BoardViewController extends Controller implements Initializable {
                 }
             }
 
-        System.out.println(levelManager.getBoard());
-    } else {
-        System.out.println("Movimiento no válido: (" + newX + ", " + newY + ")");
+            System.out.println(levelManager.getBoard());
+        } else {
+            System.out.println("Movimiento no válido: (" + newX + ", " + newY + ")");
+        }
     }
-}
 
- private boolean isValidMove(int x, int y) {
-    // Verifica si el movimiento está dentro de los límites y no es una pared
-    return x >= 0 && x < levelManager.getBoard().getWidth() && y >= 0 && y < levelManager.getBoard().getHeight()
-            && levelManager.getBoard().getCell(x, y) != '#';
-}
+    private boolean isValidMove(int x, int y) {
+        // Verifica si el movimiento está dentro de los límites y no es una pared
+        return x >= 0 && x < levelManager.getBoard().getWidth() && y >= 0 && y < levelManager.getBoard().getHeight()
+                && levelManager.getBoard().getCell(x, y) != '#';
+    }
 
- 
- 
     private void drawBoard() {
         gridPane.getChildren().clear();
         gridPane.getColumnConstraints().clear();
@@ -275,7 +311,7 @@ public class BoardViewController extends Controller implements Initializable {
         gridPane.setFocusTraversable(true);
         gridPane.setOnKeyPressed(this::handleKeyPress);
         gridPane.requestFocus();
-        levelManager.loadLevel(levelManager.getCurrentLevel());
+        levelManager.loadLevel(levelManager.getCurrentLevel(), false);
         drawBoard();
     }
 
@@ -285,25 +321,39 @@ public class BoardViewController extends Controller implements Initializable {
 
     @FXML
     private void onActionBtnGuardar(ActionEvent event) {
-        GuardarPartida guardarPartida = new GuardarPartida();
-        guardarPartida.setBoard(levelManager.getBoard());
-        guardarPartida.setVector(movimientos);
-        ManejoDatos.guardarPartida(guardarPartida);
+        try {
+            // Crear un archivo para guardar la partida
+            FileWriter fileWriter = new FileWriter("src/main/java/una/cr/ac/levels/partida_guardada.txt");
+            PrintWriter printWriter = new PrintWriter(fileWriter);
+
+            // Guardar el nivel actual
+            printWriter.println("Nivel:" + levelManager.getCurrentLevel());
+
+            // Guardar el estado del tablero
+            LinkedList board = levelManager.getBoard();
+            for (int i = 0; i < board.getHeight(); i++) {
+                StringBuilder row = new StringBuilder();
+                for (int j = 0; j < board.getWidth(); j++) {
+                    row.append(board.getCell(j, i));
+                }
+                printWriter.println(row.toString());
+            }
+            // Cerrar el archivo
+            printWriter.close();
+
+            System.out.println("Partida guardada exitosamente.");
+        } catch (IOException e) {
+            System.err.println("Error al guardar la partida: " + e.getMessage());
+        }
+        levelManager=null;
+        // Navegar de vuelta al menú principal
         FlowController.getInstance().goViewInWindow("MenuView");
         ((Stage) btnGuardar.getScene().getWindow()).close();
     }
 
-    public void cargarPartida(GuardarPartida partida) {
-        this.movimientos = partida.getVector();
-        levelManager.setBoard(partida.getBoard());
-        drawBoard();
-        updateLevelLabel();
-    }
-    
-    
-      private void onGameCompleted() {
+    private void onGameCompleted() {
         System.out.println("¡Felicidades! Has completado todos los niveles.");
-        
+
         // Redirigir a la vista de ganadores
         FlowController.getInstance().goViewInWindow("FinalView");
 

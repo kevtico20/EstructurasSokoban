@@ -1,42 +1,39 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package una.cr.ac.model;
 
-import java.util.Vector;
-
-/**
- *
- * @author ArauzKJ
- */
 public class GuardarPartida {
 
-    LinkedList board;
-    Vector<String> vector;
+    private int nivel;
+    private String[] levelData;
+    private String archivo; // Nuevo atributo para el nombre del archivo
 
-    public GuardarPartida(LinkedList board, Vector<String> vector) {
-        this.board = board;
-        this.vector = vector;
+    // Constructor
+    public GuardarPartida(int nivel, String[] levelData) {
+        this.nivel = nivel;
+        this.levelData = levelData;
     }
 
-    public GuardarPartida() {
+    // Getters y Setters
+    public int getNivel() {
+        return nivel;
     }
 
-    public LinkedList getBoard() {
-        return board;
+    public void setNivel(int nivel) {
+        this.nivel = nivel;
     }
 
-    public void setBoard(LinkedList board) {
-        this.board = board;
+    public String[] getLevelData() {
+        return levelData;
     }
 
-    public Vector<String> getVector() {
-        return vector;
+    public void setLevelData(String[] levelData) {
+        this.levelData = levelData;
     }
 
-    public void setVector(Vector<String> vector) {
-        this.vector = vector;
+    public String getArchivo() {
+        return archivo;
     }
-    
+
+    public void setArchivo(String archivo) {
+        this.archivo = archivo;
+    }
 }

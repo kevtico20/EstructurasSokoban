@@ -35,16 +35,40 @@ public class LevelManager {
         }
     }
 
-    public LevelManager() {
-        this.currentLevel = 1;
-        this.stack = new Stack<>();
-        loadLevel(currentLevel);
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 
-    public void loadLevel(int level) {
+    public LevelManager(int nivel, boolean cargarPartida) {
+        this.currentLevel = nivel;
+        this.stack = new Stack<>();
+        loadLevel(currentLevel, cargarPartida);
+    }
+
+    public LevelManager() {
+        this(1, false);
+        this.stack = new Stack<>();
+    }
+
+    public void loadLevel(int level, boolean cargarPartida) {
         if (level <= TOTAL_LEVELS) {
-            board = new LinkedList(20, 10);
-            board.initializeLevel(level);
+            if (cargarPartida) {
+                // Cargar la partida desde el archivo guardado
+                GuardarPartida partida = ManejoDeDatos.leePartida();
+                if (partida != null && partida.getNivel() == level) {
+                    // Inicializar `board` con las dimensiones correctas antes de usar `setBoardFromSavedData`
+                    board = new LinkedList(20, 10);
+                    // Usar los datos de la partida guardada
+                    setBoardFromSavedData(partida.getLevelData());
+                } else {
+                    throw new IllegalArgumentException("Error al cargar la partida guardada.");
+                }
+            } else {
+                // Cargar el nivel normalmente desde un archivo de nivel estándar
+                board = new LinkedList(20, 10);
+                board.initializeLevel(level, false);
+            }
+
             player = new Player(board);
             stack.clear();
             updateStack();  // Inicializa el stack para detectar cajas en posiciones finales
@@ -52,6 +76,16 @@ public class LevelManager {
         } else {
             onGameCompleted();
         }
+    }
+
+    public void setBoardFromSavedData(String[] levelData) {
+        for (int y = 0; y < levelData.length; y++) {
+            String row = levelData[y];
+            for (int x = 0; x < row.length(); x++) {
+                board.setCell(x, y, row.charAt(x));  // Aquí es donde el tablero se configura
+            }
+        }
+        updateStack();  // Asegúrate de que el stack esté alineado con el nuevo tablero
     }
 
     private void updateStack() {
@@ -155,7 +189,7 @@ public class LevelManager {
     public void advanceLevel() {
         if (currentLevel < TOTAL_LEVELS) {
             currentLevel++;
-            loadLevel(currentLevel);
+            loadLevel(currentLevel, false);  // Cargar el siguiente nivel desde un archivo estándar
         } else {
             onGameCompleted();  // Llama al método cuando se completa el último nivel
         }

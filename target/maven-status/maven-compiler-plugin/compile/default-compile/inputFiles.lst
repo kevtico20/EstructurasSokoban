@@ -11,6 +11,7 @@ D:\sokoban\src\main\java\una\cr\ac\sokoban\App.java
 D:\sokoban\src\main\java\una\cr\ac\controller\MenuViewController.java
 D:\sokoban\src\main\java\una\cr\ac\util\ManejoDatos.java
 D:\sokoban\src\main\java\una\cr\ac\util\Respuesta.java
+D:\sokoban\src\main\java\una\cr\ac\model\LevelLoader.java
 D:\sokoban\src\main\java\una\cr\ac\model\LevelManager.java
 D:\sokoban\src\main\java\una\cr\ac\util\AppContext.java
 D:\sokoban\src\main\java\una\cr\ac\model\Player.java
@@ -18,3 +19,4 @@ D:\sokoban\src\main\java\una\cr\ac\util\Formato.java
 D:\sokoban\src\main\java\una\cr\ac\model\Img.java
 D:\sokoban\src\main\java\una\cr\ac\controller\FinalViewController.java
 D:\sokoban\src\main\java\una\cr\ac\controller\SpriteAnimation.java
+D:\sokoban\src\main\java\una\cr\ac\model\ManejoDeDatos.java

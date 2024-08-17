@@ -13,8 +13,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.stage.Stage;
 import una.cr.ac.model.GuardarPartida;
+import una.cr.ac.model.ManejoDeDatos;
 import una.cr.ac.util.FlowController;
-import una.cr.ac.util.ManejoDatos;
+//import una.cr.ac.util.ManejoDatos;
 
 /**
  * FXML Controller class
@@ -50,14 +51,19 @@ public class MenuViewController extends Controller implements Initializable {
 
     @FXML
     private void onActionSalir(ActionEvent event) {
-         Platform.exit();
+        Platform.exit();
     }
 
     @FXML
     private void onActionBtnCargarPartida(ActionEvent event) {
-        GuardarPartida partida = ManejoDatos.leePartida();
-        FlowController.getInstance().goViewInWindow("BoardView", partida);
-        ((Stage) btnCargarPartida.getScene().getWindow()).close();
+        GuardarPartida partida = ManejoDeDatos.leePartida();
+        if (partida != null) {
+            // Pasar la partida a BoardView y cargarla
+            FlowController.getInstance().goViewInWindow("BoardView", partida);
+            ((Stage) btnCargarPartida.getScene().getWindow()).close();
+        } else {
+            System.out.println("Error al cargar la partida. Partida no encontrada o archivo corrupto.");
+        }
     }
 
 }
