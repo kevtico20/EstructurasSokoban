@@ -198,9 +198,14 @@ public class BoardViewController extends Controller implements Initializable {
         if (isValidMove(newX, newY)) {
             levelManager.movePlayer(newX, newY);
             drawBoard();
-
+            if (count == 3) {
+                count = 0;
+            } else {
+                count++;
+            }
             // Verifica si todas las cajas están en sus posiciones finales después del movimiento
             if (levelManager.isLevelComplete()) {
+
                 if (levelManager.getCurrentLevel() < levelManager.getTOTAL_LEVELS()) {
                     levelManager.advanceLevel();  // Avanza al siguiente nivel si no es el último
                     drawBoard();  // Redibuja el tablero para el nuevo nivel
@@ -345,7 +350,7 @@ public class BoardViewController extends Controller implements Initializable {
         } catch (IOException e) {
             System.err.println("Error al guardar la partida: " + e.getMessage());
         }
-        levelManager=null;
+        levelManager = null;
         // Navegar de vuelta al menú principal
         FlowController.getInstance().goViewInWindow("MenuView");
         ((Stage) btnGuardar.getScene().getWindow()).close();
