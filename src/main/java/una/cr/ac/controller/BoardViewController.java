@@ -160,7 +160,11 @@ public class BoardViewController extends Controller implements Initializable {
     if (isValidMove(newX, newY)) {
         levelManager.movePlayer(newX, newY);
         drawBoard();
-
+        if(count==3){
+                    count=0;
+                } else{
+                count++;
+              }
         // Verifica si todas las cajas están en sus posiciones finales después del movimiento
         if (levelManager.isLevelComplete()) {
                 if (levelManager.getCurrentLevel() < levelManager.getTOTAL_LEVELS()) {

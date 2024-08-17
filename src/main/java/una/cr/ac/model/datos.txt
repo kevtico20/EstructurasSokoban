@@ -1,12 +1,12 @@
 ####################
-#!@       #.       #
-#       ###        #
-#       # #  #  ####
-#      ####  #  #   
-#     #.  ####  #   
-#    #    #  $  ####
-#         $        #
-#         #        #
+#. .   #   #       #
+#   #  #####       #
+# # #           #  #
+#   # #######   #  #
+# ###       #   #  #
+# $$  # $   #   #. #
+# #   #@      # ####
+#     #     #      #
 ####################
 ---
 right
@@ -20,12 +20,99 @@ left
 left
 left
 left
+down
+down
+down
+down
+down
+down
+down
+down
+right
+right
+right
+right
+up
+right
+right
+right
+right
+right
+down
+right
+right
+up
+left
+up
+left
+left
+right
+down
 left
 left
 left
 left
+down
+left
+up
+up
+down
+down
+left
+down
+down
+down
+down
+down
+down
+down
+right
+right
+up
+right
+up
+down
+left
+up
+up
+left
+down
+down
+down
+down
+down
+down
+up
+up
+left
+down
+left
+up
+up
+up
 left
 left
-left
-left
+up
+up
+up
+right
+down
+down
+right
+down
+down
+right
+right
+right
+right
+up
+up
+up
+up
+right
+down
+right
+right
+down
+down
 ===
