@@ -324,6 +324,8 @@ public class BoardViewController extends Controller implements Initializable {
         gridPane.setOnKeyPressed(this::handleKeyPress);
         gridPane.requestFocus();
         levelManager.loadLevel(levelManager.getCurrentLevel(), false);
+        movimientos.clear();
+      
         drawBoard();
     }
 

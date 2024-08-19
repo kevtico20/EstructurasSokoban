@@ -1,22 +1,22 @@
-C:\Users\Kevin\Documents\CarpetaU\SegundoSemestre2024\estructuras\proyecto1\EstructurasSokoban\src\main\java\una\cr\ac\controller\BoardViewController.java
-C:\Users\Kevin\Documents\CarpetaU\SegundoSemestre2024\estructuras\proyecto1\EstructurasSokoban\src\main\java\una\cr\ac\util\Mensaje.java
-C:\Users\Kevin\Documents\CarpetaU\SegundoSemestre2024\estructuras\proyecto1\EstructurasSokoban\src\main\java\una\cr\ac\controller\FinalViewController.java
-C:\Users\Kevin\Documents\CarpetaU\SegundoSemestre2024\estructuras\proyecto1\EstructurasSokoban\src\main\java\una\cr\ac\model\LevelLoader.java
-C:\Users\Kevin\Documents\CarpetaU\SegundoSemestre2024\estructuras\proyecto1\EstructurasSokoban\src\main\java\una\cr\ac\model\Node.java
-C:\Users\Kevin\Documents\CarpetaU\SegundoSemestre2024\estructuras\proyecto1\EstructurasSokoban\src\main\java\una\cr\ac\util\Formato.java
-C:\Users\Kevin\Documents\CarpetaU\SegundoSemestre2024\estructuras\proyecto1\EstructurasSokoban\src\main\java\una\cr\ac\util\Request.java
-C:\Users\Kevin\Documents\CarpetaU\SegundoSemestre2024\estructuras\proyecto1\EstructurasSokoban\src\main\java\una\cr\ac\model\Img.java
-C:\Users\Kevin\Documents\CarpetaU\SegundoSemestre2024\estructuras\proyecto1\EstructurasSokoban\src\main\java\una\cr\ac\model\ManejoDeDatos.java
-C:\Users\Kevin\Documents\CarpetaU\SegundoSemestre2024\estructuras\proyecto1\EstructurasSokoban\src\main\java\una\cr\ac\controller\Controller.java
-C:\Users\Kevin\Documents\CarpetaU\SegundoSemestre2024\estructuras\proyecto1\EstructurasSokoban\src\main\java\una\cr\ac\util\ManejoDatos.java
-C:\Users\Kevin\Documents\CarpetaU\SegundoSemestre2024\estructuras\proyecto1\EstructurasSokoban\src\main\java\una\cr\ac\model\LinkedList.java
-C:\Users\Kevin\Documents\CarpetaU\SegundoSemestre2024\estructuras\proyecto1\EstructurasSokoban\src\main\java\una\cr\ac\model\Player.java
-C:\Users\Kevin\Documents\CarpetaU\SegundoSemestre2024\estructuras\proyecto1\EstructurasSokoban\src\main\java\una\cr\ac\util\BindingUtils.java
-C:\Users\Kevin\Documents\CarpetaU\SegundoSemestre2024\estructuras\proyecto1\EstructurasSokoban\src\main\java\una\cr\ac\util\Respuesta.java
-C:\Users\Kevin\Documents\CarpetaU\SegundoSemestre2024\estructuras\proyecto1\EstructurasSokoban\src\main\java\una\cr\ac\controller\MenuViewController.java
-C:\Users\Kevin\Documents\CarpetaU\SegundoSemestre2024\estructuras\proyecto1\EstructurasSokoban\src\main\java\una\cr\ac\controller\SpriteAnimation.java
-C:\Users\Kevin\Documents\CarpetaU\SegundoSemestre2024\estructuras\proyecto1\EstructurasSokoban\src\main\java\una\cr\ac\util\AppContext.java
-C:\Users\Kevin\Documents\CarpetaU\SegundoSemestre2024\estructuras\proyecto1\EstructurasSokoban\src\main\java\una\cr\ac\model\LevelManager.java
-C:\Users\Kevin\Documents\CarpetaU\SegundoSemestre2024\estructuras\proyecto1\EstructurasSokoban\src\main\java\una\cr\ac\model\GuardarPartida.java
-C:\Users\Kevin\Documents\CarpetaU\SegundoSemestre2024\estructuras\proyecto1\EstructurasSokoban\src\main\java\una\cr\ac\sokoban\App.java
-C:\Users\Kevin\Documents\CarpetaU\SegundoSemestre2024\estructuras\proyecto1\EstructurasSokoban\src\main\java\una\cr\ac\util\FlowController.java
+C:\Users\Extreme PC\Documents\PROGRA 4\EstructurasSokoban\src\main\java\una\cr\ac\controller\FinalViewController.java
+C:\Users\Extreme PC\Documents\PROGRA 4\EstructurasSokoban\src\main\java\una\cr\ac\model\LevelLoader.java
+C:\Users\Extreme PC\Documents\PROGRA 4\EstructurasSokoban\src\main\java\una\cr\ac\model\Img.java
+C:\Users\Extreme PC\Documents\PROGRA 4\EstructurasSokoban\src\main\java\una\cr\ac\model\Node.java
+C:\Users\Extreme PC\Documents\PROGRA 4\EstructurasSokoban\src\main\java\una\cr\ac\controller\BoardViewController.java
+C:\Users\Extreme PC\Documents\PROGRA 4\EstructurasSokoban\src\main\java\una\cr\ac\model\ManejoDeDatos.java
+C:\Users\Extreme PC\Documents\PROGRA 4\EstructurasSokoban\src\main\java\una\cr\ac\util\Respuesta.java
+C:\Users\Extreme PC\Documents\PROGRA 4\EstructurasSokoban\src\main\java\una\cr\ac\util\Request.java
+C:\Users\Extreme PC\Documents\PROGRA 4\EstructurasSokoban\src\main\java\una\cr\ac\model\LevelManager.java
+C:\Users\Extreme PC\Documents\PROGRA 4\EstructurasSokoban\src\main\java\una\cr\ac\util\Mensaje.java
+C:\Users\Extreme PC\Documents\PROGRA 4\EstructurasSokoban\src\main\java\una\cr\ac\util\ManejoDatos.java
+C:\Users\Extreme PC\Documents\PROGRA 4\EstructurasSokoban\src\main\java\una\cr\ac\util\BindingUtils.java
+C:\Users\Extreme PC\Documents\PROGRA 4\EstructurasSokoban\src\main\java\una\cr\ac\controller\MenuViewController.java
+C:\Users\Extreme PC\Documents\PROGRA 4\EstructurasSokoban\src\main\java\una\cr\ac\model\LinkedList.java
+C:\Users\Extreme PC\Documents\PROGRA 4\EstructurasSokoban\src\main\java\una\cr\ac\util\Formato.java
+C:\Users\Extreme PC\Documents\PROGRA 4\EstructurasSokoban\src\main\java\una\cr\ac\util\AppContext.java
+C:\Users\Extreme PC\Documents\PROGRA 4\EstructurasSokoban\src\main\java\una\cr\ac\util\FlowController.java
+C:\Users\Extreme PC\Documents\PROGRA 4\EstructurasSokoban\src\main\java\una\cr\ac\sokoban\App.java
+C:\Users\Extreme PC\Documents\PROGRA 4\EstructurasSokoban\src\main\java\una\cr\ac\controller\Controller.java
+C:\Users\Extreme PC\Documents\PROGRA 4\EstructurasSokoban\src\main\java\una\cr\ac\model\GuardarPartida.java
+C:\Users\Extreme PC\Documents\PROGRA 4\EstructurasSokoban\src\main\java\una\cr\ac\model\Player.java
+C:\Users\Extreme PC\Documents\PROGRA 4\EstructurasSokoban\src\main\java\una\cr\ac\controller\SpriteAnimation.java

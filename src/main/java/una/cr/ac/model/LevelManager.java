@@ -71,8 +71,12 @@ public class LevelManager {
             }
 
             player = new Player(board);
-            stack.clear();
-            updateStack();  // Inicializa el stack para detectar cajas en posiciones finales
+            stack.clear();    
+           // Inicializa el stack para detectar cajas en posiciones finales
+            if(cargarPartida){
+               updateStack();
+            }
+      
             System.out.println("Cargando nivel " + level + ". Número de cajas: " + getNumberOfTargets());
         } else {
             onGameCompleted();
@@ -244,6 +248,6 @@ public class LevelManager {
     public void resetToInitialState() {
         loadLevel(currentLevel, false);
         this.stack.clear();
-        updateStack();
+        updateStack();}
     }
-}
+
