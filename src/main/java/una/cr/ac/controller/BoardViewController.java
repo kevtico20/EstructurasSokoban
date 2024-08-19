@@ -207,8 +207,15 @@ public class BoardViewController extends Controller implements Initializable {
             if (levelManager.isLevelComplete()) {
 
                 if (levelManager.getCurrentLevel() < levelManager.getTOTAL_LEVELS()) {
-                    levelManager.advanceLevel();  // Avanza al siguiente nivel si no es el último
-                    drawBoard();  // Redibuja el tablero para el nuevo nivel
+                    replayMovements(() -> {
+                        movimientos.clear();
+                        levelManager.advanceLevel();
+                        drawBoard();
+                    });
+
+                    /*movimientos.clear();
+                    levelManager.advanceLevel();
+                    drawBoard();*/
                 } else {
                     onGameCompleted();  // Llama al método para completar el juego si es el último nivel
                 }
@@ -365,5 +372,42 @@ public class BoardViewController extends Controller implements Initializable {
         // Cerrar la ventana actual
         Stage currentStage = (Stage) gridPane.getScene().getWindow();
         currentStage.close();
+    }
+
+    private void replayMovements(Runnable onComplete) {
+        // Restaurar el estado inicial del nivel
+        levelManager.resetToInitialState();
+        drawBoard();
+        int i;
+        Timeline timeline = new Timeline();
+        for (i = 0; i < movimientos.size(); i++) {
+            String movimiento = movimientos.get(i);
+            KeyFrame keyFrame = new KeyFrame(Duration.seconds(i * 0.5), event -> {
+                switch (movimiento) {
+                    case "up":
+                        direction = 1;
+                        movePlayer(levelManager.getPlayer().getX(), levelManager.getPlayer().getY() - 1);
+                        break;
+                    case "down":
+                        direction = 0;
+                        movePlayer(levelManager.getPlayer().getX(), levelManager.getPlayer().getY() + 1);
+                        break;
+                    case "left":
+                        direction = 2;
+                        movePlayer(levelManager.getPlayer().getX() - 1, levelManager.getPlayer().getY());
+                        break;
+                    case "right":
+                        direction = 3;
+                        movePlayer(levelManager.getPlayer().getX() + 1, levelManager.getPlayer().getY());
+                        break;
+                }
+            });
+            if (i < movimientos.size()) {
+                timeline.getKeyFrames().add(keyFrame);
+            }
+
+        }
+        timeline.setOnFinished(event -> onComplete.run());
+        timeline.play();
     }
 }

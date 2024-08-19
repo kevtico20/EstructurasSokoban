@@ -15,6 +15,7 @@ import una.cr.ac.util.FlowController;
 public class LevelManager {
 
     private LinkedList board;
+    private LinkedList initialBoard;
     private Player player;
     private Stack<Point> stack;
     private int currentLevel;
@@ -237,5 +238,12 @@ public class LevelManager {
     public void setBoard(LinkedList board) {
         this.board = board;
         updateStack();  // Asegúrate de que el stack esté alineado con el nuevo tablero
+    }
+
+    
+    public void resetToInitialState() {
+        loadLevel(currentLevel, false);
+        this.stack.clear();
+        updateStack();
     }
 }
