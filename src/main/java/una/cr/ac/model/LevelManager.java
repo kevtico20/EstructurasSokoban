@@ -73,6 +73,7 @@ public class LevelManager {
             player = new Player(board);
             stack.clear();    
            // Inicializa el stack para detectar cajas en posiciones finales
+           
             if(cargarPartida){
                updateStack();
             }

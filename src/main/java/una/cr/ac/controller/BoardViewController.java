@@ -11,6 +11,7 @@ import java.util.Vector;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -207,11 +208,7 @@ public class BoardViewController extends Controller implements Initializable {
             if (levelManager.isLevelComplete()) {
 
                 if (levelManager.getCurrentLevel() < levelManager.getTOTAL_LEVELS()) {
-                    replayMovements(() -> {
-                        movimientos.clear();
-                        levelManager.advanceLevel();
-                        drawBoard();
-                    });
+                    replayMovements();
 
                     /*movimientos.clear();
                     levelManager.advanceLevel();
@@ -325,7 +322,7 @@ public class BoardViewController extends Controller implements Initializable {
         gridPane.requestFocus();
         levelManager.loadLevel(levelManager.getCurrentLevel(), false);
         movimientos.clear();
-      
+
         drawBoard();
     }
 
@@ -376,15 +373,16 @@ public class BoardViewController extends Controller implements Initializable {
         currentStage.close();
     }
 
-    private void replayMovements(Runnable onComplete) {
-        // Restaurar el estado inicial del nivel
-        levelManager.resetToInitialState();
-        drawBoard();
-        int i;
-        Timeline timeline = new Timeline();
-        for (i = 0; i < movimientos.size(); i++) {
+   private void replayMovements() {
+    // Restaurar el estado inicial del nivel
+    levelManager.resetToInitialState();
+    drawBoard();
+
+    new Thread(() -> {
+        for (int i = 0; i < movimientos.size(); i++) {
             String movimiento = movimientos.get(i);
-            KeyFrame keyFrame = new KeyFrame(Duration.seconds(i * 0.5), event -> {
+
+            Platform.runLater(() -> {
                 switch (movimiento) {
                     case "up":
                         direction = 1;
@@ -404,12 +402,28 @@ public class BoardViewController extends Controller implements Initializable {
                         break;
                 }
             });
-            if (i < movimientos.size()) {
-                timeline.getKeyFrames().add(keyFrame);
+
+            // Pausar el hilo actual para crear el efecto de animación
+            try {
+                Thread.sleep(500); // 0.5 segundos entre cada movimiento
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
 
+            // Verificar si es el último movimiento
+            if (i == movimientos.size() - 1) {
+                Platform.runLater(() -> {
+                    // Acciones finales después de la animación
+                    movimientos.clear();
+                    levelManager.advanceLevel();
+                    drawBoard();
+                });
+                break; // Salir del bucle una vez completada la animación
+            }
         }
-        timeline.setOnFinished(event -> onComplete.run());
-        timeline.play();
-    }
+
+    }).start();
+}
+
+
 }
