@@ -157,27 +157,35 @@ public class FlowController {
     }
 
     public void goViewInWindow(String viewName, GuardarPartida partida) {
-        FXMLLoader loader = getLoader(viewName);
-        Controller controller = loader.getController();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/una/cr/ac/sokoban/view/" + viewName + ".fxml"));
+            Parent root = loader.load();  // Cargar la vista y obtener el nodo raíz
 
-        // Verificar si el controlador es de tipo BoardViewController y cargar la partida
-        if (controller instanceof BoardViewController) {
-            ((BoardViewController) controller).cargarPartida(partida);
+            Controller controller = loader.getController();
+
+            // Verificar si el controlador es de tipo BoardViewController y cargar la partida
+            if (controller instanceof BoardViewController) {
+                ((BoardViewController) controller).cargarPartida(partida);
+            }
+
+            // Inicializar la ventana
+            Stage stage = new Stage();
+            stage.setTitle("Sokoban");
+            stage.setOnHidden((WindowEvent event) -> {
+                controller.getStage().getScene().setRoot(new Pane());
+                controller.setStage(null);
+            });
+            controller.setStage(stage);
+
+            // Configurar la escena con el nodo raíz
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.centerOnScreen();
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-        controller.initialize();
-        Stage stage = new Stage();
-        stage.setTitle("Sokoban");
-        stage.setOnHidden((WindowEvent event) -> {
-            controller.getStage().getScene().setRoot(new Pane());
-            controller.setStage(null);
-        });
-        controller.setStage(stage);
-        Parent root = loader.getRoot();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.centerOnScreen();
-        stage.show();
     }
 
     public void goLogInWindowModal(Boolean resizable) {

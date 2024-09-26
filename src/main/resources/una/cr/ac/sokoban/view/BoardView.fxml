@@ -73,7 +73,7 @@
                <font>
                   <Font size="20.0" />
                </font></Button>
-            <Button fx:id="btnsalir" mnemonicParsing="false" prefHeight="43.0" prefWidth="143.0" styleClass="btnButtonBoard" stylesheets="@Style.css" text="Salir" VBox.vgrow="ALWAYS" />
+            <Button fx:id="btnsalir" mnemonicParsing="false" onAction="#onActionSalir" prefHeight="43.0" prefWidth="143.0" styleClass="btnButtonBoard" stylesheets="@Style.css" text="Salir" VBox.vgrow="ALWAYS" />
             <ImageView fitHeight="111.0" fitWidth="136.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../resources/Chest.gif" />
