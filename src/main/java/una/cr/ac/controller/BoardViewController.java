@@ -69,24 +69,28 @@ public class BoardViewController extends Controller implements Initializable {
     @FXML
     private void moveUp(ActionEvent event) {
         direction = 1;
+        movimientos.add("up");
         movePlayer(levelManager.getPlayer().getX(), levelManager.getPlayer().getY() - 1);
     }
 
     @FXML
     private void moveDown(ActionEvent event) {
         direction = 0;
+        movimientos.add("down");
         movePlayer(levelManager.getPlayer().getX(), levelManager.getPlayer().getY() + 1);
     }
 
     @FXML
     private void moveLeft(ActionEvent event) {
         direction = 2;
+        movimientos.add("left");
         movePlayer(levelManager.getPlayer().getX() - 1, levelManager.getPlayer().getY());
     }
 
     @FXML
     private void moveRight(ActionEvent event) {
         direction = 3;
+        movimientos.add("right");
         movePlayer(levelManager.getPlayer().getX() + 1, levelManager.getPlayer().getY());
     }
 
@@ -130,9 +134,7 @@ public class BoardViewController extends Controller implements Initializable {
             if (levelManager.isLevelComplete()) {
 
                 if (levelManager.getCurrentLevel() < LevelManager.getTOTAL_LEVELS()) {
-                    levelManager.advanceLevel();
-                    drawBoard();
-                    updateLevelLabel();
+                    System.out.println("Este es el nivel despues de cargarlo:");
                     replayMovements();
                 } else {
                     onGameCompleted();
@@ -372,12 +374,14 @@ public class BoardViewController extends Controller implements Initializable {
                 }
 
                 // Verificar si es el último movimiento
-                if (i == movimientos.size() - 1) {
+                if (i == movimientos.size() - 2) {
                     Platform.runLater(() -> {
                         // Acciones finales después de la animación
                         movimientos.clear();
                         levelManager.advanceLevel();
                         drawBoard();
+                        updateLevelLabel();
+                        System.out.println("Este el vector de movimientos:" + movimientos);
                     });
                     break; // Salir del bucle una vez completada la animación
                 }

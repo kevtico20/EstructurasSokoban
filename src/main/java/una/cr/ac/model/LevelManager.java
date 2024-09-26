@@ -58,6 +58,9 @@ public class LevelManager {
                 GuardarPartida partida = ManejoDeDatos.leePartida();
                 if (partida != null && partida.getNivel() == level) {
                     // Inicializar `board` con las dimensiones correctas antes de usar `setBoardFromSavedData`
+                    
+                    this.currentLevel = partida.getNivel();
+                    System.out.println(currentLevel);
                     board = new LinkedList(20, 10);
                     // Usar los datos de la partida guardada
                     setBoardFromSavedData(partida.getLevelData());
