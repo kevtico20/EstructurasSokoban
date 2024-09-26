@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Vector;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -45,6 +46,7 @@ public class BoardViewController extends Controller implements Initializable {
     private LevelManager levelManager;
     private int direction = 0;
     private int count = 0;
+    private Vector<String> movimientos = new Vector<>();
     @FXML
     private Button btnsalir;
 
@@ -126,10 +128,12 @@ public class BoardViewController extends Controller implements Initializable {
                 count++;
             }
             if (levelManager.isLevelComplete()) {
+
                 if (levelManager.getCurrentLevel() < LevelManager.getTOTAL_LEVELS()) {
                     levelManager.advanceLevel();
                     drawBoard();
                     updateLevelLabel();
+                    replayMovements();
                 } else {
                     onGameCompleted();
                 }
@@ -243,7 +247,7 @@ public class BoardViewController extends Controller implements Initializable {
                 })
         );
 
-        animation.setCycleCount(Animation.INDEFINITE);  
+        animation.setCycleCount(Animation.INDEFINITE);
         animation.play();
 
         return imageView;
@@ -255,6 +259,8 @@ public class BoardViewController extends Controller implements Initializable {
         gridPane.setOnKeyPressed(this::handleKeyPress);
         gridPane.requestFocus();
         levelManager.loadLevel(levelManager.getCurrentLevel(), false);
+        movimientos.clear();
+
         drawBoard();
     }
 
@@ -327,4 +333,57 @@ public class BoardViewController extends Controller implements Initializable {
             }
         });
     }
+
+    private void replayMovements() {
+        // Restaurar el estado inicial del nivel
+        levelManager.resetToInitialState();
+        drawBoard();
+
+        new Thread(() -> {
+            for (int i = 0; i < movimientos.size(); i++) {
+                String movimiento = movimientos.get(i);
+
+                Platform.runLater(() -> {
+                    switch (movimiento) {
+                        case "up":
+                            direction = 1;
+                            movePlayer(levelManager.getPlayer().getX(), levelManager.getPlayer().getY() - 1);
+                            break;
+                        case "down":
+                            direction = 0;
+                            movePlayer(levelManager.getPlayer().getX(), levelManager.getPlayer().getY() + 1);
+                            break;
+                        case "left":
+                            direction = 2;
+                            movePlayer(levelManager.getPlayer().getX() - 1, levelManager.getPlayer().getY());
+                            break;
+                        case "right":
+                            direction = 3;
+                            movePlayer(levelManager.getPlayer().getX() + 1, levelManager.getPlayer().getY());
+                            break;
+                    }
+                });
+
+                // Pausar el hilo actual para crear el efecto de animación
+                try {
+                    Thread.sleep(500); // 0.5 segundos entre cada movimiento
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                // Verificar si es el último movimiento
+                if (i == movimientos.size() - 1) {
+                    Platform.runLater(() -> {
+                        // Acciones finales después de la animación
+                        movimientos.clear();
+                        levelManager.advanceLevel();
+                        drawBoard();
+                    });
+                    break; // Salir del bucle una vez completada la animación
+                }
+            }
+
+        }).start();
+    }
+
 }

@@ -15,6 +15,7 @@ import una.cr.ac.util.FlowController;
 public class LevelManager {
 
     private LinkedList board;
+    private LinkedList initialBoard;
     private Player player;
     private Stack<Point> stack;
     private int currentLevel;
@@ -70,8 +71,13 @@ public class LevelManager {
             }
 
             player = new Player(board);
-            stack.clear();
-            updateStack();  // Inicializa el stack para detectar cajas en posiciones finales
+            stack.clear();    
+           // Inicializa el stack para detectar cajas en posiciones finales
+           
+            if(cargarPartida){
+               updateStack();
+            }
+      
             System.out.println("Cargando nivel " + level + ". Número de cajas: " + getNumberOfTargets());
         } else {
             onGameCompleted();
@@ -238,4 +244,11 @@ public class LevelManager {
         this.board = board;
         updateStack();  // Asegúrate de que el stack esté alineado con el nuevo tablero
     }
-}
+
+    
+    public void resetToInitialState() {
+        loadLevel(currentLevel, false);
+        this.stack.clear();
+        updateStack();}
+    }
+
