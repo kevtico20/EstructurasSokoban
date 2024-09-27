@@ -98,6 +98,7 @@ public class BoardViewController extends Controller implements Initializable {
         if (partida != null) {
             levelManager.loadLevel(partida.getNivel(), true);
             levelManager.getPlayer().setPosition(partida.getPlayerX(), partida.getPlayerY());
+            movimientos = new Vector<>(partida.getMovimientos());
             drawBoard();
             updateLevelLabel();
         }
@@ -288,6 +289,16 @@ public class BoardViewController extends Controller implements Initializable {
             }
 
             printWriter.println("Player:" + levelManager.getPlayer().getX() + "," + levelManager.getPlayer().getY());
+
+            // Guardar los movimientos en el nuevo formato
+            printWriter.print("Movimiento:");
+            for (int i = 0; i < movimientos.size(); i++) {
+                printWriter.print(movimientos.get(i));
+                if (i < movimientos.size() - 1) {
+                    printWriter.print(",");
+                }
+            }
+            printWriter.println();
 
             printWriter.close();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
