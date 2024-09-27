@@ -1,5 +1,7 @@
 package una.cr.ac.model;
 
+import java.util.List;
+
 public class GuardarPartida {
 
     private int nivel;
@@ -7,13 +9,15 @@ public class GuardarPartida {
     private String archivo; // Nombre del archivo (opcional)
     private int playerX; // Coordenada X del jugador
     private int playerY; // Coordenada Y del jugador
+    private List<String> movimientos; // Vector de movimientos
 
     // Constructor
-    public GuardarPartida(int nivel, String[] levelData, int playerX, int playerY) {
+    public GuardarPartida(int nivel, String[] levelData, int playerX, int playerY, List<String> movimientos) {
         this.nivel = nivel;
         this.levelData = levelData;
         this.playerX = playerX;
         this.playerY = playerY;
+        this.movimientos = movimientos;
     }
 
     // Getters y Setters
@@ -63,6 +67,15 @@ public class GuardarPartida {
         return playerX + "," + playerY;
     }
 
+    public List<String> getMovimientos() {
+        return movimientos;
+    }
+
+    public void setMovimientos(List<String> movimientos) {
+        this.movimientos = movimientos;
+    }
+
+        
     // Método para establecer la posición del jugador desde un string "x,y"
     public void setPlayerPosition(String position) {
         String[] coords = position.split(",");

@@ -15,6 +15,7 @@ public class ManejoDeDatos {
             int nivel = 1;
             int playerX = 0;
             int playerY = 0;
+            List<String> movimientos = new ArrayList<>();
 
             // Procesar la línea que indica el nivel
             if (line != null && line.startsWith("Nivel:")) {
@@ -36,6 +37,14 @@ public class ManejoDeDatos {
                 playerX = Integer.parseInt(playerPos[0]);
                 playerY = Integer.parseInt(playerPos[1]);
             }
+            line = br.readLine();
+            // Leer los movimientos
+             if (line != null && line.startsWith("Movimiento:")) {
+                String[] movimientosArray = line.split(":")[1].trim().split(",");
+                for (String movimiento : movimientosArray) {
+                    movimientos.add(movimiento.trim());
+                }
+            }
 
             // Verificación: Mostrar el contenido del tablero leído
             System.out.println("Datos de la partida guardada:");
@@ -45,7 +54,7 @@ public class ManejoDeDatos {
             System.out.println("Posición del jugador: (" + playerX + "," + playerY + ")");
 
             // Crear el objeto GuardarPartida con los datos del nivel, tablero y posición del jugador
-            partida = new GuardarPartida(nivel, levelData.toArray(new String[0]), playerX, playerY);
+            partida = new GuardarPartida(nivel, levelData.toArray(new String[0]), playerX, playerY, movimientos);
 
         } catch (IOException e) {
             e.printStackTrace();
