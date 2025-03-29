@@ -5,7 +5,7 @@ Estructuras Sokoban is a Java-based implementation of the classic Sokoban game. 
 ## Contributors
 - [kjarj54](https://github.com/kjarj54)
 - [kevtico20](https://github.com/kevtico20)
-- [j0ksan](https://github.com/j0ksan)
+- [j0ksan73](https://github.com/j0ksan73)
 
 ## Project Overview
 
